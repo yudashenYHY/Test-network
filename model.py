@@ -180,3 +180,5 @@ if __name__ == '__main__':
         dropout=0.1,
         num_classes=4
     )
+
+print("123")
