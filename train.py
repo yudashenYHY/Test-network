@@ -40,9 +40,9 @@ def training_loop(n_epochs, optimizer, model, loss_fn, train_loader):
             loss.backward()
             optimizer.step()
             loss_train += loss.item()
-            print('{} Epoch[{}], [{}/200] loss '.format(
-                datetime.datetime.now(), epoch, num
-            ))
+            # print('{} Epoch[{}], [{}/200] loss '.format(
+            #     datetime.datetime.now(), epoch, num
+            # ))
 
         if epoch == 1 or epoch % 10 == 0:
             print('{} Epoch {}, Training loss {}'.format(
