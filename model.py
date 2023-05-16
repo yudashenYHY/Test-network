@@ -144,6 +144,7 @@ class Transformer(nn.Module):
 class ViT(nn.Module):
     def __init__(self, *, batchsize=1, img_size=224, patch_size=16, head_num=12, embed_dim=768, dropout=0.1, num_classes=2):
         super(ViT, self).__init__()
+        print(batchsize)
         self.Position_Embedding = Position_Embedding(batchsize, img_size, patch_size, 3, embed_dim, None, dropout, num_classes)
         self.dropout = nn.Dropout(dropout)
         self.layers = clones(Transformer(batchsize, embed_dim, head_num, dropout), 12)
@@ -172,7 +173,7 @@ class ViT(nn.Module):
 
 if __name__ == '__main__':
     v = ViT(
-        batchsize=1,
+        batchsize=4,
         img_size=224,
         patch_size=16,
         head_num=12,

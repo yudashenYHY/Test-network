@@ -22,8 +22,8 @@ transform=transforms.Compose([
 glioma_train = datasets.ImageFolder("datasets/Training", transform=transform)
 glioma_test = datasets.ImageFolder("datasets/Training", transform=transform)
 
-train_loader = torch.utils.data.DataLoader(glioma_train, batch_size=1, shuffle=True)
-test_loader = torch.utils.data.DataLoader(glioma_test, batch_size=1, shuffle=True)
+train_loader = torch.utils.data.DataLoader(glioma_train, batch_size=4, shuffle=True)
+test_loader = torch.utils.data.DataLoader(glioma_test, batch_size=4, shuffle=True)
 
 def training_loop(n_epochs, optimizer, model, loss_fn, train_loader):
     for epoch in range(1, n_epochs+1):
@@ -44,16 +44,15 @@ def training_loop(n_epochs, optimizer, model, loss_fn, train_loader):
             #     datetime.datetime.now(), epoch, num
             # ))
 
-        if epoch == 1 or epoch % 10 == 0:
-            print('{} Epoch {}, Training loss {}'.format(
-                datetime.datetime.now(), epoch, loss_train / len(train_loader)
-            ))
+        print('{} Epoch {}, Training loss {}'.format(
+            datetime.datetime.now(), epoch, loss_train / len(train_loader)
+        ))
 
 device = (torch.device('cuda') if torch.cuda.is_available()
           else torch.device('cpu'))
 print(f"Training on device {device}.")
 
-model = ViT(batchsize=1,
+model = ViT(batchsize=4,
         img_size=224,
         patch_size=16,
         head_num=12,
