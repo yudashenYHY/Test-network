@@ -70,8 +70,8 @@ training_loop(
     train_loader = train_loader,
 )
 
-def validate(model, train_loader, val_loader):
-    for name, loader in [("train", train_loader), ("val", val_loader)]:
+def validate(model, train_loader, test_loader):
+    for name, loader in [("train", train_loader), ("test", test_loader)]:
         correct = 0
         total = 0
 
@@ -87,7 +87,7 @@ def validate(model, train_loader, val_loader):
         print("Accuracy {}: {:.2f}".format(name , correct / total))
         print(total)
 
-validate(model, train_loader, val_loader)
+validate(model, train_loader, test_loader)
 # def main(args):
 #     device = torch.device(args.device if torch.cuda.is_available() else "cpu")
 #     batch_size = args.batch_size
