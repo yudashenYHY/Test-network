@@ -22,8 +22,8 @@ transform=transforms.Compose([
 glioma_train = datasets.ImageFolder("datasets/Training", transform=transform)
 glioma_test = datasets.ImageFolder("datasets/Training", transform=transform)
 
-train_loader = torch.utils.data.DataLoader(glioma_train, batch_size=4, shuffle=True)
-test_loader = torch.utils.data.DataLoader(glioma_test, batch_size=4, shuffle=True)
+train_loader = torch.utils.data.DataLoader(glioma_train, batch_size=16, shuffle=True)
+test_loader = torch.utils.data.DataLoader(glioma_test, batch_size=16, shuffle=True)
 
 def training_loop(n_epochs, optimizer, model, loss_fn, train_loader):
     for epoch in range(1, n_epochs+1):
@@ -52,7 +52,7 @@ device = (torch.device('cuda') if torch.cuda.is_available()
           else torch.device('cpu'))
 print(f"Training on device {device}.")
 
-model = ViT(batchsize=4,
+model = ViT(batchsize=16,
         img_size=224,
         patch_size=16,
         head_num=12,
@@ -63,7 +63,7 @@ optimizer = optim.Adam(model.parameters(), lr=1e-4)
 loss_fn = nn.CrossEntropyLoss()
 
 training_loop(
-    n_epochs = 1,
+    n_epochs = 100,
     optimizer = optimizer,
     model = model,
     loss_fn = loss_fn,
